@@ -1,0 +1,34 @@
+import React, { useState } from 'react'
+
+type Carrers = { id: number | null; name: string }
+const initialObject: Carrers = {
+  id: null,
+  name: '',
+}
+
+const Basic2 = () => {
+  const [products, setProducts] = useState([initialObject])
+  const newProducts = () => {
+    setProducts([
+      ...products,
+      {
+        id: products.length,
+        name: 'Hello, React!',
+      },
+    ])
+  }
+  return (
+    <div>
+      <button onClick={newProducts}>Add New Product</button>
+      <ul>
+        {products.map((product) => (
+          <li key={product.id}>
+            {product.name} id: {product.id}
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
+}
+
+export default Basic2

@@ -4,18 +4,29 @@ interface AppName {
   name?: string
 }
 
-const Basic1: React.FunctionComponent<AppName> = ({ name }) => {
-  const clickHandler = (): void => {
-    console.log('clicked')
-  }
-  const [count, setCount] = useState<number>(0)
+const Basic1 = () => {
+  const [product, setProducts] = useState({ name: '', price: '' })
 
   return (
     <>
-      <button onClick={() => setCount(count + 1)}>+ {count}</button>
-      <button onClick={() => setCount(count - 1)}>-</button>
-      <h1>Hello, {name}!</h1>
-      <h2>Hello, TypeScript!</h2>
+      <form>
+        <input
+          type="text"
+          value={product.name}
+          onChange={(evt) =>
+            setProducts({ ...product, name: evt.target.value })
+          }
+        />
+        <input
+          type="text"
+          value={product.price}
+          onChange={(evt) =>
+            setProducts({ ...product, price: evt.target.value })
+          }
+        />
+      </form>
+      <h3>Product name is {product.name} !</h3>
+      <h3>Price is {product.price} !</h3>
     </>
   )
 }
