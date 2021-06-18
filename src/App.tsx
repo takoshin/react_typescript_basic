@@ -1,22 +1,41 @@
-import React from 'react'
+import React, { useReducer } from 'react'
 import logo from './logo.svg'
 import './App.css'
-// import Basic2 from 'components/Basic2'
-// import BasicUseEffect from 'components/BasicUseEffect'
-// import TimerCountainer from 'components/TimerCountainer'
-import ApiFetch from 'components/ApiFetch'
+import CompB from 'components/CompB'
+import AppContext from 'contexts/AppContext'
 
-function App() {
+type ActionType = {
+  type: 'add_1' | 'multiple_3' | 'reset'
+}
+
+const initialState: number = 0
+const reducer = (currentState: number, action: ActionType) => {
+  switch (action.type) {
+    case 'add_1':
+      return currentState + 1
+    case 'multiple_3':
+      return currentState * 3
+    case 'reset':
+      return initialState
+    default:
+      return currentState
+  }
+}
+
+function App(): JSX.Element {
+  const [count, dispatch] = useReducer(reducer, initialState)
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        {/* <Basic2 /> */}
-        {/* <BasicUseEffect /> */}
-        {/* <TimerCountainer /> */}
-        <ApiFetch />
-      </header>
-    </div>
+    <AppContext.Provider
+      value={{ countProvided: count, dispatchProvided: dispatch }}
+    >
+      <div className="App">
+        <header className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+          Count {count}
+          <CompB />
+        </header>
+      </div>
+    </AppContext.Provider>
   )
 }
 
