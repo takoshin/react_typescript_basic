@@ -3,6 +3,7 @@ import logo from './logo.svg'
 import './App.css'
 import CompB from 'components/CompB'
 import AppContext from 'contexts/AppContext'
+import Memo from 'components/Memo'
 
 type ActionType = {
   type: 'add_1' | 'multiple_3' | 'reset'
@@ -31,8 +32,9 @@ function App(): JSX.Element {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          Count {count}
-          <CompB />
+          {/* Count {count} */}
+          {/* <CompB /> */}
+          <Memo />
         </header>
       </div>
     </AppContext.Provider>
